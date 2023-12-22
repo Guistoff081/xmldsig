@@ -1,4 +1,7 @@
 # Changelog
+v0.7.1
+- Fixed NoMethodError raising when
+
 v0.7.0
 - Changed ReferencedNodeNotFound parent class to Xmldsig::Error for easier error handling
 
@@ -19,7 +22,7 @@ v0.6.1
 - Using strict base64 encoding
 
 v0.4.1 22-03-2015
-- Added support for SHA256, SHA384 and SHA512 
+- Added support for SHA256, SHA384 and SHA512
 
 v0.4.0 20-11-2015
 - Breaking change: Signing now leaves previously signed signatures in tact. Use Xmldsig::SignedDocument.new(unsigned_xml, force: true) to resign all signatures

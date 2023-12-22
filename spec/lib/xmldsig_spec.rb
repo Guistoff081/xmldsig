@@ -80,6 +80,20 @@ describe Xmldsig do
         expect(signed_document.validate(certificate)).to eq(true)
       end
     end
+
+    context "a custom attribute id mentioning a child element of the document" do
+      let(:unsigned_xml) { File.read("spec/fixtures/unsigned_custom_attribute_id_without_namespace_prefix_with_element_reference.xml") }
+      let(:unsigned_document) { Xmldsig::SignedDocument.new(unsigned_xml, :id_attr => 'Id') }
+      let(:signed_document) { unsigned_document.sign(private_key) }
+
+      it "should be signable an validateable" do
+        expect(Xmldsig::SignedDocument.new(signed_document, :id_attr => 'Id').validate(certificate)).to eq(true)
+      end
+
+      it "should have a signature element" do
+        expect(Xmldsig::SignedDocument.new(signed_document, :id_attr => 'Id').signatures.count).to eq(1)
+      end
+    end
   end
 
   describe "Allows passing referenced documents" do
